@@ -1,14 +1,17 @@
 import React, { useState } from 'react'
 import ResizeObserver from 'rc-resize-observer'
-import { Image, Table, TableColumnsType } from 'antd'
+import { Image, Space, Table, TableColumnsType } from 'antd'
+import { DeleteFilled, EditOutlined } from '@ant-design/icons'
+
 import dayjs from 'dayjs'
 
 import { IUser } from '../../models'
 import { IUsersTableProps } from './types'
 
 import './users-table.less'
+import { EditUserModal } from '../modals/edit-user-modal'
 
-export const UsersTable = ({ loading, users }: IUsersTableProps) => {
+export const UsersTable = ({ loading, users}: IUsersTableProps) => {
   const [ height, setTableHeight ] = useState(undefined)
 
   const heighDelta = 39 // 39 - высота заголовка таблицы
@@ -16,8 +19,9 @@ export const UsersTable = ({ loading, users }: IUsersTableProps) => {
     <div className="users-table">
       <Table size="small" loading={loading} dataSource={users} columns={columns}
         scroll={{ y: height }} pagination={false} rowKey={keySelector}
-        onRow={(user) => ({ onDoubleClick: () => console.log(user) })} />
+        onRow={(user) => ({ onDoubleClick: () =>  console.log(user)})} />
     </div>
+
   </ResizeObserver>
 }
 
@@ -54,5 +58,15 @@ const columns: TableColumnsType<IUser> = [
     title: 'Дата регистрации',
     dataIndex: [ 'registered', 'date' ],
     render: (date: string) => dayjs(date).format('D MMMM YYYY ')
+  },
+  {
+    title: 'Действия',
+    key: 'actions',
+    render: (_, record) => (
+      <Space size="middle">
+        <DeleteFilled onClick={() => console.log('я обязательно сделаю удаление')}/> {/* иконка удаления*/}
+        <EditOutlined onClick={() => console.log('я обязательно сделаю редактирование')}/> {/* иконка редактирования*/}
+      </Space>
+    ),
   }
 ]
