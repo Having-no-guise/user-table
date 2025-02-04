@@ -3,10 +3,11 @@ import { IUser } from '../../models'
 export interface IUsersTableProps {
   loading?: boolean
   users: IUser[]
-  actions?: IUsersTableAction
+  actions?: IUsersTableAction[]
 }
 
 export interface IUsersTableAction {
   key?: string
   action: (value: string) => void
+  actionEdit: (user: IUser) => void
 }

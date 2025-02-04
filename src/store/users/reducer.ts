@@ -3,7 +3,7 @@ import { createReducer, PayloadAction } from '@reduxjs/toolkit'
 import { IUsersState } from './types'
 
 import { generate, add } from './thunks'
-import { removeUser } from './actions'
+import { removeUser, editUser } from './actions'
 import { IUser } from 'models'
 
 const initialState: IUsersState = {//стейт юзеров
@@ -22,7 +22,17 @@ export const usersReducer = createReducer(initialState, builder =>
     //remove редьюсер
     .addCase(removeUser, (state, action: PayloadAction<string>) => {
       state.users = state.users.filter((user:IUser) => user.id.value !== action.payload);
+    })
+    .addCase(editUser, (state, action: PayloadAction<IUser>) => { state.users.map(user => {if (user.id.value === action.payload.id.value) {
+      user.name.first = action.payload.name.first
+      user.name.last = action.payload.name.last
+      user.email = action.payload.email
+      user.phone = action.payload.phone
+      user.cell = action.payload.cell
+      user.dob = action.payload.dob
     }
-  )
+
+
+    })})
 )
     
