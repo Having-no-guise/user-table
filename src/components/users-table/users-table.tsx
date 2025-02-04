@@ -11,11 +11,11 @@ import { IUsersTableProps } from './types'
 import './users-table.less'
 import { EditUserModal } from '../modals/edit-user-modal'//модальное окно
 
-export const UsersTable = ({ loading, users, actions}: IUsersTableProps) => {
+export const UsersTable = ({ loading, users, actions }: IUsersTableProps) => {
 
   const [visible, setIsModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState(undefined);
-  const [ height, setTableHeight ] = useState(undefined)
+  const [height, setTableHeight] = useState(undefined)
 
   const heighDelta = 39 // 39 - высота заголовка таблицы
 
@@ -29,12 +29,12 @@ export const UsersTable = ({ loading, users, actions}: IUsersTableProps) => {
     <div className="users-table">
       <Table size="small" loading={loading} dataSource={users} columns={columns.map((column) => ({
         ...column,
-        render: (text, record : IUser, index) => {
+        render: (text, record: IUser, index) => {
           if (column.key === 'actions') {
             return (
               <Space size='middle'>
-              <DeleteFilled onClick={ () => actions[0].action(record.id.value)}/>
-              <EditOutlined onClick={ () => handleEditClick(record)}/>
+                <DeleteFilled onClick={() => actions[0].action(record.id.value)} />
+                <EditOutlined onClick={() => handleEditClick(record)} />
               </Space>
             )
           }
@@ -44,9 +44,9 @@ export const UsersTable = ({ loading, users, actions}: IUsersTableProps) => {
 
       }))}
         scroll={{ y: height }} pagination={false} rowKey={keySelector}
-        onRow={(user) => ({ onDoubleClick: () =>  handleEditClick(user)})} />{/* удаление на даблклик */}
-        
-        <EditUserModal visible={visible} user={selectedUser} setIsModalOpen={setIsModalOpen} action={actions[0].actionEdit}/>
+        onRow={(user) => ({ onDoubleClick: () => handleEditClick(user) })} />{/* удаление на даблклик */}
+
+      <EditUserModal visible={visible} user={selectedUser} setIsModalOpen={setIsModalOpen} action={actions[0].actionEdit} />
     </div>
 
   </ResizeObserver>
@@ -62,7 +62,7 @@ const columns: TableColumnsType<IUser> = [
   },
   {
     title: 'Имя пользователя',
-    dataIndex: [ 'login', 'username' ]
+    dataIndex: ['login', 'username']
   },
   {
     title: 'Полное имя',
@@ -79,11 +79,11 @@ const columns: TableColumnsType<IUser> = [
   },
   {
     title: 'Возраст',
-    dataIndex: [ 'dob', 'age' ]
+    dataIndex: ['dob', 'age']
   },
   {
     title: 'Дата регистрации',
-    dataIndex: [ 'registered', 'date' ],
+    dataIndex: ['registered', 'date'],
     render: (date: string) => dayjs(date).format('D MMMM YYYY ')
   },
   {

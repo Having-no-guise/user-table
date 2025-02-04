@@ -12,9 +12,9 @@ export const UsersTableContainer = () => {
   const dispatch = useAppDispatch()
 
   const actions: IUsersTableAction[] = [
-    { key: 'delete', action: (value : string) => dispatch(removeUser(value)), actionEdit: (user: IUser) => dispatch(editUser(user)) }//экшен на удаление
+    { key: 'delete', action: (value: string) => dispatch(removeUser(value)), actionEdit: (user: IUser) => dispatch(editUser(user)) }//экшен на удаление
   ]
-  
+
 
   const users = useAppSelector(s => s.users.users)
   const fetching = useAppSelector(s => s.users.fetching)

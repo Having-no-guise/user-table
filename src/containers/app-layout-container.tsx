@@ -11,7 +11,7 @@ export const AppLayoutContainer = () => {
 
   const actions: IAppAction[] = [
     { key: 'generate', title: 'Сгенерировать еще раз', action: () => dispatch(generate(20)) },
-    { key: 'add', title: 'Добавить пользователя', action: () => dispatch(add(1))}//Экшен на добавление 1 пользователя
+    { key: 'add', title: 'Добавить пользователя', action: () => dispatch(add(1)) }//Экшен на добавление 1 пользователя
   ]
 
   return <AppLayout actions={actions}>

@@ -1,5 +1,5 @@
 import { IUsersTableAction } from 'components/users-table/types';
-import {IUser} from '../../models'
+import { IUser } from '../../models'
 
 export interface EditUserModalProps {
   visible: boolean;

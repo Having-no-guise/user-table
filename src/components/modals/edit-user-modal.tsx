@@ -7,11 +7,6 @@ const { Text } = Typography
 
 export const EditUserModal: React.FC<EditUserModalProps> = ({ visible, setIsModalOpen, user, action }) => {
 
-
-
-
-
-
   if (user) {
 
     useEffect(() => {
@@ -20,8 +15,8 @@ export const EditUserModal: React.FC<EditUserModalProps> = ({ visible, setIsModa
       setEmail(user.email)
       setPhone(user.phone)
       setCell(user.cell)
-      setDob(user.dob.date.slice(0,10))
-    },[user])
+      setDob(user.dob.date.slice(0, 10))
+    }, [user])
 
 
     const [name, setName] = useState(user.name.first)
@@ -29,17 +24,17 @@ export const EditUserModal: React.FC<EditUserModalProps> = ({ visible, setIsModa
     const [email, setEmail] = useState(user.email)
     const [phone, setPhone] = useState(user.phone)
     const [cell, setCell] = useState(user.cell)
-    const [dob, setDob] = useState(user.dob.date.slice(0,10))
+    const [dob, setDob] = useState(user.dob.date.slice(0, 10))
 
     const handleOk = async () => {
       saveEdit()
       setIsModalOpen(false);
     };
-  
+
     const handleCancel = () => {
       setIsModalOpen(false);
     };
-  
+
     const saveEdit = () => {
 
       const newName = {
@@ -66,13 +61,13 @@ export const EditUserModal: React.FC<EditUserModalProps> = ({ visible, setIsModa
         phone: phone,
         cell: cell,
         location: user.location
-      } 
+      }
       action(newUser)
     }
 
 
     return (
-      <Modal title="Редактировать пользователя" visible={visible} onOk={handleOk} onCancel={handleCancel}>
+      <Modal title="Редактировать пользователя" visible={visible} onOk={handleOk} onCancel={handleCancel} okText="Сохранить" cancelText="Отмена">
         <div style={{ display: 'flex', flexDirection: 'row' }}>
           <Text>Имя: </Text>
           <Input value={name} style={{ marginLeft: '10px' }} onChange={(e) => setName(e.target.value)} />
@@ -90,17 +85,17 @@ export const EditUserModal: React.FC<EditUserModalProps> = ({ visible, setIsModa
 
         <div style={{ display: 'flex', flexDirection: 'row' }}>
           <Text>Телефон: </Text>
-          <Input value={phone} style={{ marginLeft: '10px' }} onChange={(e) => setPhone(e.target.value)}/>
+          <Input value={phone} style={{ marginLeft: '10px' }} onChange={(e) => setPhone(e.target.value)} />
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'row' }}>
           <Text>Ячейка? (cell): </Text>
-          <Input value={cell} style={{ marginLeft: '10px' }} onChange={(e) => setCell(e.target.value)}/>
+          <Input value={cell} style={{ marginLeft: '10px' }} onChange={(e) => setCell(e.target.value)} />
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'row' }}>
           <Text>Дата рождения: </Text>
-          <Input value={dob} style={{ marginLeft: '10px' }} onChange={(e) => setDob(e.target.value)}/>{/* добавить сохранение изменений */}
+          <Input value={dob} style={{ marginLeft: '10px' }} onChange={(e) => setDob(e.target.value)} />
         </div>
 
 
