@@ -11,7 +11,9 @@ import { IUsersTableProps } from './types'
 import './users-table.less'
 import { EditUserModal } from '../modals/edit-user-modal'
 
-export const UsersTable = ({ loading, users}: IUsersTableProps) => {
+export const UsersTable = ({ loading, users, actions}: IUsersTableProps) => {
+
+
   const [ height, setTableHeight ] = useState(undefined)
 
   const heighDelta = 39 // 39 - высота заголовка таблицы
@@ -19,7 +21,7 @@ export const UsersTable = ({ loading, users}: IUsersTableProps) => {
     <div className="users-table">
       <Table size="small" loading={loading} dataSource={users} columns={columns}
         scroll={{ y: height }} pagination={false} rowKey={keySelector}
-        onRow={(user) => ({ onDoubleClick: () =>  console.log(user)})} />
+        onRow={(user) => ({ onDoubleClick: () =>  actions.action(user.id.value)})} />{/* удаление на даблклик */}
     </div>
 
   </ResizeObserver>
