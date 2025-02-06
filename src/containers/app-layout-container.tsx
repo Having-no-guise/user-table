@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 
 import { AppLayout, IAppAction } from '../components/app-layout'
 import { UsersTableContainer } from './users-table-container'
@@ -14,7 +14,9 @@ export const AppLayoutContainer = () => {
     { key: 'add', title: 'Добавить пользователя', action: () => dispatch(add(1)) }//Экшен на добавление 1 пользователя
   ]
 
-  return <AppLayout actions={actions}>
+  return <Suspense> 
+  <AppLayout actions={actions}>
     <UsersTableContainer />
   </AppLayout>
+  </Suspense>
 }

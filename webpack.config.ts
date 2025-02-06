@@ -2,6 +2,7 @@ import path from 'path'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import { Configuration as WebpackConfiguration } from 'webpack'
 import { Configuration as DevServerConfiguration } from 'webpack-dev-server'
+const { ModuleFederationPlugin } = require("webpack").container;
 
 export default (_: never, { mode = 'development' }: IWebpackArgs): Configuration => {
   return {
@@ -17,7 +18,7 @@ export default (_: never, { mode = 'development' }: IWebpackArgs): Configuration
     output: {
       path: path.resolve(__dirname, 'dist'),
       filename: 'user-table-bundle.js',
-      publicPath: 'auto'
+      publicPath: 'http://localhost:8080'
     },
 
     resolve: {
@@ -52,6 +53,19 @@ export default (_: never, { mode = 'development' }: IWebpackArgs): Configuration
     },
 
     plugins: [
+      new ModuleFederationPlugin({
+        name: 'UserTable',
+        remotes: {
+          catsImages: "catsImages@http://localhost:8081/remoteEntry.js"
+        },
+        shared: {
+          react: {singleton: true, eager: true},
+          "react-dom": {singleton: true, eager: true},
+          'antd': { singleton: true, eager: true },
+        }
+      
+      }),
+
       new HtmlWebpackPlugin({
         title: 'User Table',
         template: 'public/index.html'

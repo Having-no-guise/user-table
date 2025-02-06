@@ -7,11 +7,18 @@ import ru from 'dayjs/locale/ru'
 dayjs.locale(ru)
 
 import React from 'react'
-import ReactDOM from 'react-dom'
+import ReactDOM from "react-dom/client";
 
 import { ReactApplicationContainer } from './containers/react-application-container'
 
 import 'antd/dist/antd.min.css'
 
 const container = document.getElementById('root')
-ReactDOM.render(<ReactApplicationContainer />, container)
+
+
+const root = ReactDOM.createRoot(container);
+root.render(
+  
+  <ReactApplicationContainer />
+  
+);

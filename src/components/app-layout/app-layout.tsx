@@ -4,7 +4,7 @@ import { Layout, Menu } from 'antd'
 import { IAppLayoutProps } from './types'
 
 import './app-layout.less'
-
+const CatsImages = React.lazy(()=> import('catsImages/gridOfImages'))
 export const AppLayout = ({ children, actions }: IAppLayoutProps) => {
   const items = useMemo(
     () => actions?.map(({ key, title, action }) => ({ key: key ?? title, label: title, onClick: () => { action() } })) ?? [],
@@ -18,6 +18,7 @@ export const AppLayout = ({ children, actions }: IAppLayoutProps) => {
     <Layout>
       <Layout.Sider className="app-layout-sider" width={350}>
         {/* Module Federation */}
+        <CatsImages/>
       </Layout.Sider>
       <Layout.Content className="app-layout-content">
         {children}
